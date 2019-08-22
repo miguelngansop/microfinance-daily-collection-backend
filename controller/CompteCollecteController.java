@@ -1,6 +1,7 @@
 package com.sarki.micro.controller;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ import com.sarki.micro.repository.CompteCollecteRepository;
 import com.sarki.micro.repository.CompteRepository;
 import com.sarki.micro.repository.OperationRepository;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import exception.ResourceNotFoundException;
 
 @RestController
@@ -215,8 +217,12 @@ public class CompteCollecteController {
 	
 	@GetMapping("/compteToday")
 	public List<?> compteofToday(){
-		Date today = new Date();
-		return compteRepo.findByOperationsCreatedAtEquals(today);
+		Calendar calendrier = Calendar.getInstance();
+		Date today = calendrier.getTime();
+		calendrier.add(Calendar.DAY_OF_YEAR, 1);
+		Date tomorow = calendrier.getTime();
+		System.out.println("today :"+today.toLocaleString()+ " tomorow :"+tomorow.toLocaleString());
+		return compteRepo.findByOperationsCreatedAtBetween(today, tomorow);
 	}
 	
 	

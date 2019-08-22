@@ -52,6 +52,12 @@ public class CompteController {
 	public List<Compte> getAllCompte() {
 		return compteRepo.findAll();
 	}
+	
+	// Get history Comptes
+		@GetMapping("/historique/{id}")
+		public List<?> getAllHis(@PathVariable(value="id") Long compteId){
+			return null ;
+		}
 
 	@PostMapping("/comptecourant/{id}")
 	public CompteCourant createCompteCourant(@PathVariable(value = "id") Long clientId) {

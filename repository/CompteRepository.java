@@ -10,7 +10,9 @@ import com.sarki.micro.model.Compte;
 
 @Repository
 public interface CompteRepository extends JpaRepository<Compte, Long> {
-	public List<?> findByOperationsCreatedAtEquals(Date aujourdui);
+	public List<?> findByOperationsCreatedAtBetween(Date aujourdui, Date tomorow);
 	public List<?> findByOperationsAgentAgenceId(Long idAgence);
+	public List<?> findByIdOrderByOperationsCreatedAtDesc(Long id);
+
 	
 }
